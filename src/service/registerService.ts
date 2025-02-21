@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt';
 import { invalidCredentialsError } from '../erros/invalidCredentialsError';
+import { registerRepository } from '../repositories/registerRepository';
 
 async function registerPost( name: string, password: string, cpf: string, email: string ) {
     const registerEmail = await registerRepository.searchingEmail(email);
