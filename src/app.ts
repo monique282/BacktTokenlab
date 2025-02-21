@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import express, { json, Request, Response, Express } from "express";
 import "express-async-errors";
 import httpStatus from "http-status";
+import errorHandlingMiddleware from "./middlewares/errorHandlingMiddleware";
 
 dotenv.config();
 
@@ -16,5 +17,6 @@ app
     })
 
 
+app.use(errorHandlingMiddleware);
 
 export default app;
