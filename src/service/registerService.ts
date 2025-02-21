@@ -1,8 +1,7 @@
 import bcrypt from 'bcrypt';
-import { invalidCredentialsError } from "@/erros/invalidCredentialsError";
-import { registerRepository } from '@/repositories/userRepository/registerRepository';
+import { invalidCredentialsError } from '../erros/invalidCredentialsError';
 
-async function registerPost({ name, password, cpf, email }) {
+async function registerPost( name: string, password: string, cpf: string, email: string ) {
     const registerEmail = await registerRepository.searchingEmail(email);
     if (registerEmail) {
         throw invalidCredentialsError("Email já cadastrado");
@@ -15,8 +14,8 @@ async function registerPost({ name, password, cpf, email }) {
 
     const hashedPassword = await bcrypt.hash(password, 12)
 
-    const register = await registerRepository.registerPost( name, hashedPassword, cpf, email );
-    
+    const register = await registerRepository.registerPost(name, hashedPassword, cpf, email);
+
     return register;
 }
 
