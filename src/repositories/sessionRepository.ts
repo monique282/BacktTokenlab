@@ -1,4 +1,5 @@
-import prisma from "../database/database";
+import prisma from "../database/dataBase";
+
 
 async function sessionToken(token: string, id: number) {
     const session = await prisma.session.create({
