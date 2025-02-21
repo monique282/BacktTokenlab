@@ -16,7 +16,8 @@ app
     .get("/health", (req: Request, res: Response) => {
         return res.status(httpStatus.OK).send("Ok running! ");
     })
-    .post("/register", RegisterRouter)
+    .use("/", RegisterRouter)
+    
 
 
 app.use(errorHandlingMiddleware);
