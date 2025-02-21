@@ -5,9 +5,9 @@ import { LoginSchema } from '../schemas/loginSchemars';
 import { loginController } from '../controllers/loginController';
 
 
-const UserRouter = Router();
+const LoginRouter = Router();
 
-UserRouter.post('/login', validateBody(LoginSchema as ObjectSchema<any>), loginController.loginPost);
+LoginRouter.post('/login', validateBody(LoginSchema as ObjectSchema<any>), loginController.loginPost);
 
 
-export { UserRouter };
+export { LoginRouter };

@@ -5,6 +5,7 @@ import "express-async-errors";
 import httpStatus from "http-status";
 import errorHandlingMiddleware from "./middlewares/errorHandlingMiddleware";
 import { RegisterRouter } from "./routes/registerRouter";
+import { LoginRouter } from "./routes/liginRouter";
 
 dotenv.config();
 
@@ -17,7 +18,7 @@ app
         return res.status(httpStatus.OK).send("Ok running! ");
     })
     .use("/", RegisterRouter)
-    
+    .use("/", LoginRouter)
 
 
 app.use(errorHandlingMiddleware);
