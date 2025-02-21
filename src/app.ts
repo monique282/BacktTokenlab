@@ -4,6 +4,7 @@ import express, { json, Request, Response, Express } from "express";
 import "express-async-errors";
 import httpStatus from "http-status";
 import errorHandlingMiddleware from "./middlewares/errorHandlingMiddleware";
+import { RegisterRouter } from "./routes/registerRouter";
 
 dotenv.config();
 
@@ -15,6 +16,7 @@ app
     .get("/health", (req: Request, res: Response) => {
         return res.status(httpStatus.OK).send("Ok running! ");
     })
+    .post("/register", RegisterRouter)
 
 
 app.use(errorHandlingMiddleware);
