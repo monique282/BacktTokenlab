@@ -26,6 +26,7 @@ CREATE TABLE "session" (
 CREATE TABLE "events" (
     "id" SERIAL NOT NULL,
     "text" VARCHAR(500) NOT NULL,
+    "day" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 

@@ -6,6 +6,7 @@ import httpStatus from "http-status";
 import errorHandlingMiddleware from "./middlewares/errorHandlingMiddleware";
 import { RegisterRouter } from "./routes/registerRouter";
 import { LoginRouter } from "./routes/loginRouter";
+import { EventsRouter } from "./routes/eventsRouter";
 
 dotenv.config();
 

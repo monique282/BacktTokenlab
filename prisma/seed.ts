@@ -25,7 +25,8 @@ async function main() {
     await prisma.events.createMany({
         data:[
             {
-                text: "Quero testar se esta dando certo "
+                text: "Quero testar se esta dando certo ",
+                day: "23/02/2025",
             }
         ]
     })
