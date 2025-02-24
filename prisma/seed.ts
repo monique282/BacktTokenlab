@@ -22,6 +22,14 @@ async function main() {
         skipDuplicates: true,
     });
 
+    await prisma.events.createMany({
+        data:[
+            {
+                text: "Quero testar se esta dando certo "
+            }
+        ]
+    })
+
 } 
 
 

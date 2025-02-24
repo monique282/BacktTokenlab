@@ -19,6 +19,7 @@ app
     })
     .use("/", RegisterRouter)
     .use("/", LoginRouter)
+    .use("/", EventsRouter)
 
 
 app.use(errorHandlingMiddleware);
