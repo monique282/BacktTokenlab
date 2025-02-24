@@ -2,7 +2,8 @@ import { eventsRepository } from '../repositories/eventsRepository';
 
 async function eventsPost(text: string, day: string) {
     const dayExists = await eventsRepository.dayExistsGet(day);
-    if (dayExists) {
+    console.log("dayExiste", dayExists)
+    if (dayExists.length !== 0) {
         const updateEvents = await eventsRepository.updateEventsPost(text, day);
         return updateEvents;
     }
