@@ -13,5 +13,15 @@ export const EventsSchema = Joi.object({
             'string.max': 'O texto deve ter no máximo 500 caracteres.',
             'string.pattern.base': 'O texto deve conter apenas letras e espaços.',
             'any.required': 'O campo texto é obrigatório.',
-        })
+        }),
+    day: Joi.string()
+        .min(10)
+        .max(10)
+        .messages({
+            'string.base': 'A data deve ser uma string.',
+            'string.empty': 'A data não pode estar vazio.',
+            'string.min': 'A data deve ter pelo menos 10 caracteres.',
+            'string.max': 'A data deve ter no máximo 10 caracteres.',
+            'any.required': 'A data é obrigatório.',
+        }),
 });

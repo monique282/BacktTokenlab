@@ -1,16 +1,15 @@
-import bcrypt from 'bcrypt';
-import { invalidCredentialsError } from '../erros/invalidCredentialsError';
-import { registerRepository } from '../repositories/registerRepository';
+import { eventsRepository } from '../repositories/eventsRepository';
 
 async function eventsPost(text: string, day: string) {
     const dayExists = await eventsRepository.dayExistsGet(day);
     if (dayExists) {
-        const updateEvents = await eventsRepository.updateEventsPost(text);
+        const updateEvents = await eventsRepository.updateEventsPost(text, day);
+        return updateEvents;
     }
 
     const registerEvents = await eventsRepository.registerEventsPost(text, day);
     
-    return registerEvents;
+    return registerEvents; 
 }
 
 export const EventsService = {
