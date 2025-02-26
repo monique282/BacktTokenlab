@@ -9,6 +9,6 @@ const EventsRouter = Router();
 
 EventsRouter.post('/events', authenticateToken, validateBody(EventsSchema), eventsController.eventsPost);
 EventsRouter.get('/events', authenticateToken, eventsController.eventsGet);
-EventsRouter.delete('/events', authenticateToken, eventsController.eventsDelete);
+EventsRouter.delete('/events/:id', authenticateToken, eventsController.eventsDelete);
 
 export { EventsRouter };

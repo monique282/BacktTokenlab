@@ -27,8 +27,20 @@ async function eventsGet(req: AuthenticatedRequest, res: Response) {
     res.status(httpStatus.OK).send(textEvents);
 }
 
+async function eventsDelete(req: AuthenticatedRequest, res: Response) {
+    const { userId } = req;
+    const id = Number(req.params.id);
+    if (!userId) {
+        return res.status(httpStatus.UNAUTHORIZED).send({ message: "Usuário não autenticado." });
+    }
+
+    const textEvents = await EventsService.eventsDelete(userId, id);
+    res.status(httpStatus.OK).send(textEvents);
+}
+
 
 export const eventsController = {
     eventsPost,
-    eventsGet
+    eventsGet,
+    eventsDelete
 };

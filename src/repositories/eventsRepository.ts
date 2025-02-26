@@ -38,9 +38,20 @@ async function eventsGet(userId: number) {
     return result;
 }
 
+async function eventsDelete(userId: number, id: number) {
+    const result = await prisma.events.deleteMany({
+        where: {
+            userId,
+            id
+        }
+    });
+    return result;
+}
+
 export const eventsRepository = {
     dayExistsGet,
     updateEventsPost,
     registerEventsPost,
-    eventsGet
+    eventsGet,
+    eventsDelete
 };

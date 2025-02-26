@@ -13,13 +13,17 @@ async function eventsPost(text: string, day: string, userId: number) {
 }
 
 async function eventsGet(userId: number) {
-
     const events = await eventsRepository.eventsGet(userId);
+    return events;
+}
 
+async function eventsDelete(userId: number, id: number) {
+    const events = await eventsRepository.eventsDelete(userId, id);
     return events;
 }
 
 export const EventsService = {
     eventsPost,
-    eventsGet
+    eventsGet,
+    eventsDelete
 };
