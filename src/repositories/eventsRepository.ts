@@ -66,14 +66,12 @@ async function eventsGet(userId: number) {
 
 
 async function eventsDelete(id: number) {
-    // Deletar os registros na tabela "Events" que fazem referência ao evento
     await prisma.events.deleteMany({
         where: {
             eventId: id,
         },
     });
 
-    // Agora podemos deletar o evento na tabela "Event"
     const result = await prisma.event.delete({
         where: {
             id: id,
