@@ -31,7 +31,7 @@ async function main() {
             data: [
                 {
                     text: "Quero testar se está dando certo",
-                    day: "23/02/2025",
+                    day: "2025/02/23",
                     userId: user.id, 
                 },
             ],

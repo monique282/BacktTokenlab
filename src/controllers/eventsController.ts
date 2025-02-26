@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Response } from "express";
 import httpStatus from "http-status";
 import { EventsService } from "../service/eventsService";
 import { AuthenticatedRequest } from "../middlewares/authenticationTokenMiddleware";
