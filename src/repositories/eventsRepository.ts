@@ -8,7 +8,7 @@ async function dayExistsGet(day: string) {
     });
 
     return result;
-}
+};
 
 async function registerEventToDay(text: string, day: string, userId: number, startTime: string, endTime: string) {
     const newEvent = await prisma.event.create({
@@ -26,10 +26,9 @@ async function registerEventToDay(text: string, day: string, userId: number, sta
             day
         }
     })
-    
-    return [newEvent];
-}
 
+    return [newEvent];
+};
 
 async function eventsGet(userId: number) {
     const eventsForDay = await prisma.events.findMany({
@@ -52,7 +51,7 @@ async function eventsGet(userId: number) {
                 day: event.day,
                 createdAt: event.createdAt,
                 updatedAt: event.updatedAt,
-                events: [] 
+                events: []
             };
         }
 
@@ -62,8 +61,7 @@ async function eventsGet(userId: number) {
     }, {} as Record<string, any>);
 
     return [Object.values(groupedEvents)];
-}
-
+};
 
 async function eventsDelete(id: number) {
     await prisma.events.deleteMany({
@@ -79,12 +77,27 @@ async function eventsDelete(id: number) {
     });
 
     return result;
-}
+};
 
+async function eventsUpdate(id: number, text: string, startTime: string, endTime: string) {
+    const result = await prisma.event.update({
+        where: {
+            id
+        },
+        data: {
+            text,
+            startTime,
+            endTime
+        }
+    });
+
+    return result;
+};
 
 export const eventsRepository = {
     dayExistsGet,
-    registerEventToDay,   
+    registerEventToDay,
     eventsGet,
-    eventsDelete
+    eventsDelete,
+    eventsUpdate
 };
