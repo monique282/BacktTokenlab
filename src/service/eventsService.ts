@@ -1,9 +1,9 @@
 import { eventsRepository } from '../repositories/eventsRepository';
 
 async function eventsPost(text: string, day: string, userId: number, startTime: string, endTime: string) {
-        const newEvent = await eventsRepository.registerEventToDay(text, day, userId, startTime, endTime);
-        return newEvent;
-    
+    const newEvent = await eventsRepository.registerEventToDay(text, day, userId, startTime, endTime);
+    return newEvent;
+
 }
 
 
@@ -12,8 +12,8 @@ async function eventsGet(userId: number) {
     return events;
 }
 
-async function eventsDelete(userId: number, id: number) {
-    const events = await eventsRepository.eventsDelete(userId, id);
+async function eventsDelete(id: number) {
+    const events = await eventsRepository.eventsDelete(id);
     return events;
 }
 
