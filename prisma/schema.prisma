@@ -16,8 +16,7 @@ model Users {
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   sessions  Session[] @relation()
-  event     Events[] @relation()
-
+  events    Events[]  @relation()
 
   @@map("users")
 }
@@ -33,12 +32,12 @@ model Session {
   @@map("session")
 }
 
-
-model Events{
+model Events {
   id        Int      @id @default(autoincrement())
   userId    Int
   user      Users    @relation(fields: [userId], references: [id])
-  text      String   @db.VarChar(500)
+  eventId   Int
+  event     Event    @relation(fields: [eventId], references: [id])
   day       String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -46,3 +45,12 @@ model Events{
   @@map("events")
 }
 
+model Event {
+  id        Int      @id @default(autoincrement())
+  text      String   @db.VarChar(500)
+  startTime String
+  endTime   String
+  event     Events[] @relation()
+
+  @@map("event")
+}

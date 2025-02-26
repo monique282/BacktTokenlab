@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function main() {
-    // Criação de usuários
+    // Criar usuários
     await prisma.users.createMany({
         data: [
             {
@@ -27,15 +27,22 @@ async function main() {
     });
 
     if (user) {
-        await prisma.events.createMany({
-            data: [
-                {
-                    text: "Quero testar se está dando certo",
-                    day: "2025/02/23",
-                    userId: user.id, 
-                },
-            ],
+        const event = await prisma.event.create({
+            data: {
+                text: "Quero testar se está dando certo",
+                startTime: "08:55",
+                endTime: "09:50",
+            },
         });
+
+        await prisma.events.create({
+            data: {
+                userId: user.id,
+                eventId: event.id,
+                day: "2025/02/23",
+            },
+        });
+
     } else {
         console.error('Usuário não encontrado');
     }

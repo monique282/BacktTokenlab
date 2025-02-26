@@ -1,16 +1,11 @@
 import { eventsRepository } from '../repositories/eventsRepository';
 
-async function eventsPost(text: string, day: string, userId: number) {
-    const dayExists = await eventsRepository.dayExistsGet(day);
-    if (dayExists.length !== 0) {
-        const updateEvents = await eventsRepository.updateEventsPost(text, day);
-        return updateEvents;
-    }
-
-    const registerEvents = await eventsRepository.registerEventsPost(text, day, userId);
+async function eventsPost(text: string, day: string, userId: number, startTime: string, endTime: string) {
+        const newEvent = await eventsRepository.registerEventToDay(text, day, userId, startTime, endTime);
+        return newEvent;
     
-    return registerEvents; 
 }
+
 
 async function eventsGet(userId: number) {
     const events = await eventsRepository.eventsGet(userId);

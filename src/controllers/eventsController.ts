@@ -5,14 +5,14 @@ import { AuthenticatedRequest } from "../middlewares/authenticationTokenMiddlewa
 
 
 async function eventsPost(req: AuthenticatedRequest, res: Response) {
-    const { text, day } = req.body;
+    const { text, day, startTime, endTime } = req.body;
     const { userId } = req;
 
     if (!userId) {
         return res.status(httpStatus.UNAUTHORIZED).send({ message: "Usuário não autenticado." });
     }
 
-    const textEvents = await EventsService.eventsPost(text, day, userId);
+    const textEvents = await EventsService.eventsPost(text, day, userId, startTime, endTime);
     res.status(httpStatus.CREATED).send(textEvents);
 }
 

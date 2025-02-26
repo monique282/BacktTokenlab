@@ -26,12 +26,22 @@ CREATE TABLE "session" (
 CREATE TABLE "events" (
     "id" SERIAL NOT NULL,
     "userId" INTEGER NOT NULL,
-    "text" VARCHAR(500) NOT NULL,
+    "eventId" INTEGER NOT NULL,
     "day" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "events_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "event" (
+    "id" SERIAL NOT NULL,
+    "text" VARCHAR(500) NOT NULL,
+    "startTime" TEXT NOT NULL,
+    "endTime" TEXT NOT NULL,
+
+    CONSTRAINT "event_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
@@ -45,3 +55,6 @@ ALTER TABLE "session" ADD CONSTRAINT "session_userId_fkey" FOREIGN KEY ("userId"
 
 -- AddForeignKey
 ALTER TABLE "events" ADD CONSTRAINT "events_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "events" ADD CONSTRAINT "events_eventId_fkey" FOREIGN KEY ("eventId") REFERENCES "event"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

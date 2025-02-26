@@ -24,4 +24,16 @@ export const EventsSchema = Joi.object({
             'string.max': 'A data deve ter no máximo 10 caracteres.',
             'any.required': 'A data é obrigatório.',
         }),
+    startTime: Joi.string()
+        .required()
+        .messages({
+            'string.base': 'O hora inicial deve ser uma string.',
+            'any.required': 'O campo hora inicial é obrigatório.',
+        }),
+    endTime: Joi.string()
+        .required()
+        .messages({
+            'string.base': 'O hora final deve ser uma string.',
+            'any.required': 'O campo hora final é obrigatório.',
+        }),
 });

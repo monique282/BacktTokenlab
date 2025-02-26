@@ -10,33 +10,60 @@ async function dayExistsGet(day: string) {
     return result;
 }
 
-async function updateEventsPost(text: string, day: string) {
-    const result = await prisma.events.updateMany({
-        where: { day },
-        data: { text }
-    });
-    return result;
-}
-
-async function registerEventsPost(text: string, day: string, userId: number) {
-    const result = await prisma.events.create({
+async function registerEventToDay(text: string, day: string, userId: number, startTime: string, endTime: string) {
+    const newEvent = await prisma.event.create({
         data: {
             text,
-            day, 
-            userId
-        },
-    });
-    return result; 
-}
-
-async function eventsGet(userId: number) {
-    const result = await prisma.events.findMany({
-        where: {
-            userId
+            startTime,
+            endTime
         }
     });
-    return result;
+
+    await prisma.events.create({
+        data: {
+            userId,
+            eventId: newEvent.id,
+            day
+        }
+    })
+    
+    return [newEvent];
 }
+
+
+async function eventsGet(userId: number) {
+    const eventsForDay = await prisma.events.findMany({
+        where: {
+            userId,
+        },
+        include: {
+            event: true
+        }
+    });
+
+    const groupedEvents = eventsForDay.reduce((acc, event) => {
+        const { day } = event;
+
+        if (!acc[day]) {
+            acc[day] = {
+                id: event.id,
+                userId: event.userId,
+                eventId: event.eventId,
+                day: event.day,
+                createdAt: event.createdAt,
+                updatedAt: event.updatedAt,
+                events: [] 
+            };
+        }
+
+        acc[day].events.push(event.event);
+
+        return acc;
+    }, {} as Record<string, any>);
+
+    return [Object.values(groupedEvents)];
+}
+
 
 async function eventsDelete(userId: number, id: number) {
     const result = await prisma.events.deleteMany({
@@ -50,8 +77,7 @@ async function eventsDelete(userId: number, id: number) {
 
 export const eventsRepository = {
     dayExistsGet,
-    updateEventsPost,
-    registerEventsPost,
+    registerEventToDay,   
     eventsGet,
     eventsDelete
 };
