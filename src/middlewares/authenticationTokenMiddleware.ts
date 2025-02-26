@@ -2,42 +2,36 @@ import { NextFunction, Request, Response } from 'express';
 import * as jwt from 'jsonwebtoken';
 import { unauthorizedError } from '../erros/unauthorizedRrror';
 import { authenticationRepository } from '../repositories/authenticationTokenRepository';
-import dotenv from 'dotenv';
-dotenv.config();
 
 export async function authenticateToken(req: AuthenticatedRequest, res: Response, next: NextFunction) {
-    const authHeader = req.header('Authorization');
-    if (!authHeader) throw unauthorizedError();
+    try {
+        const authHeader = req.header('Authorization');
+        if (!authHeader) throw unauthorizedError();
 
-    const token = authHeader.split(' ')[1];
-    if (!token) throw unauthorizedError();
+        const token = authHeader.split(' ')[1];
+        if (!token) throw unauthorizedError();
 
-    const session = await authenticationRepository.findSession(token);
-    if (session) {
+        const session = await authenticationRepository.findSession(token);
+        if (!session) throw unauthorizedError();
+
         const jwtSecret = process.env.JWT_SECRET;
-
         if (!jwtSecret) {
-            throw new Error('JWT_SECRET is not defined');
+            throw new Error("JWT_SECRET não está definido!");
         }
 
-        const payload = jwt.verify(token, jwtSecret) as jwt.JwtPayload;
+        const { userId } = jwt.verify(token, jwtSecret) as JWTPayload;
+        req.userId = userId;
 
-        if (!payload || typeof payload !== 'object' || !('userId' in payload)) {
-            throw unauthorizedError();
-        }
-
-        req.userId = payload.userId as number;
+        next(); 
+    } catch (error) {
+        next(error); 
     }
-
-    if (!session) throw unauthorizedError();
-    next();
 }
 
 export type AuthenticatedRequest = Request & {
-    userId?: number;
-    representativeId?: number;
+    userId?: number; 
 };
 
-type JWTPayload = jwt.JwtPayload & {
+type JWTPayload = {
     userId: number;
 };

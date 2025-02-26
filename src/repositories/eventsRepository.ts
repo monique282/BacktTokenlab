@@ -18,18 +18,29 @@ async function updateEventsPost(text: string, day: string) {
     return result;
 }
 
-async function registerEventsPost(text: string, day: string) {
+async function registerEventsPost(text: string, day: string, userId: number) {
     const result = await prisma.events.create({
         data: {
             text,
-            day
+            day, 
+            userId
         },
     });
     return result; 
 }
 
+async function eventsGet(userId: number) {
+    const result = await prisma.events.findMany({
+        where: {
+            userId
+        }
+    });
+    return result;
+}
+
 export const eventsRepository = {
     dayExistsGet,
     updateEventsPost,
-    registerEventsPost
+    registerEventsPost,
+    eventsGet
 };
