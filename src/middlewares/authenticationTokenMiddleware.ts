@@ -17,7 +17,7 @@ export async function authenticateToken(req: AuthenticatedRequest, res: Response
         const jwtSecret = process.env.JWT_SECRET;
         if (!jwtSecret) {
             throw new Error("JWT_SECRET não está definido!");
-        }
+        };
 
         const { userId } = jwt.verify(token, jwtSecret) as JWTPayload;
         req.userId = userId;
@@ -25,8 +25,8 @@ export async function authenticateToken(req: AuthenticatedRequest, res: Response
         next(); 
     } catch (error) {
         next(error); 
-    }
-}
+    };
+};
 
 export type AuthenticatedRequest = Request & {
     userId?: number; 

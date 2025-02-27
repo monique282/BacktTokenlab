@@ -5,4 +5,4 @@ export function invalidCredentialsError(message: string): ApplicationError {
         name: 'InvalidCredentialsError',
         message,
     };
-}
+};

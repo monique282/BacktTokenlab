@@ -9,12 +9,12 @@ async function loginPost(mode: string, password: string ) {
 
     if (!login) {
         throw invalidCredentialsError("Email/CPF não cadastrado");
-    }
+    };
 
     const passwordMatch = await bcrypt.compare(password, login.password);
     if (!passwordMatch) {
         throw invalidCredentialsError("Senha não corresposnde");
-    }
+    };
 
     const token = jwt.sign({ userId: login.id, email: login.email }, process.env.JWT_SECRET as string, { expiresIn: '2d' });
     const session = await sessionRepository.sessionToken(token, login.id);

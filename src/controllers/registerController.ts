@@ -7,7 +7,7 @@ async function registerPost(req: Request, res: Response) {
     const user = await RegisterService.registerPost(name, password, cpf, email);
 
     res.status(httpStatus.CREATED).send(user);
-}
+};
 
 export const registerController = {
     registerPost

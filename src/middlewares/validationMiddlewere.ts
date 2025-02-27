@@ -4,11 +4,11 @@ import { invalidDataError } from '../erros/invalidDataError';
 
 export function validateBody<T>(schema: ObjectSchema<T>): ValidationMiddleware {
     return validate(schema, 'body');
-}
+};
 
 export function validateParams<T>(schema: ObjectSchema<T>): ValidationMiddleware {
     return validate(schema, 'params');
-}
+};
 
 function validate(schema: ObjectSchema, type: 'body' | 'params') {
     return (req: Request, res: Response, next: NextFunction) => {
@@ -24,6 +24,6 @@ function validate(schema: ObjectSchema, type: 'body' | 'params') {
             throw invalidDataError(errorMessage);
         }
     };
-}
+};
 
 type ValidationMiddleware = (req: Request, res: Response, next: NextFunction) => void;

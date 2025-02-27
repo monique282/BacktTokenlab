@@ -11,7 +11,7 @@ async function registerPost(name: string, hashedPassword: string, cpf: string, e
     });
 
     return result;
-}
+};
 
 async function searchingEmail(email: string) {
     const result = await prisma.users.findUnique({
@@ -20,7 +20,7 @@ async function searchingEmail(email: string) {
         },
     });
     return result
-}
+};
 
 async function searchingCpf(cpf: string) {
     const result = await prisma.users.findUnique({
@@ -29,7 +29,7 @@ async function searchingCpf(cpf: string) {
         },
     });
     return result
-}
+};
 
 export const registerRepository = {
     registerPost,

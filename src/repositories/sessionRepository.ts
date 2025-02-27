@@ -1,6 +1,5 @@
 import prisma from "../database/dataBase";
 
-
 async function sessionToken(token: string, id: number) {
     const session = await prisma.session.create({
         data: {
@@ -12,9 +11,7 @@ async function sessionToken(token: string, id: number) {
         },
     });
     return session;
-}
-
-
+};
 
 export const sessionRepository = {
     sessionToken,

@@ -5,7 +5,6 @@ import { authenticateToken } from '../middlewares/authenticationTokenMiddleware'
 import { eventsController } from '../controllers/eventsController';
 import { EventsUpdateSchema } from '../schemas/eventsUpdateSchemas';
 
-
 const EventsRouter = Router();
 
 EventsRouter.post('/events', authenticateToken, validateBody(EventsSchema), eventsController.eventsPost);

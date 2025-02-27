@@ -1,6 +1,5 @@
 import prisma from "../database/dataBase";
 
-
 async function findByEmailPassword(mode: string) {
     const isCPF = (/^\d{3}\.\d{3}\.\d{3}-\d{2}$/).test(mode);
     const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mode);
@@ -21,8 +20,8 @@ async function findByEmailPassword(mode: string) {
             },
         });
         return user;
-    }
-}
+    };
+};
 
 export const loginRepository = {
     findByEmailPassword,

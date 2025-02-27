@@ -7,7 +7,7 @@ async function loginPost(req: Request, res: Response) {
     const user = await LoginService.loginPost( mode, password );
 
     res.status(httpStatus.OK).send(user);
-}
+};
 
 export const loginController = {
     loginPost
